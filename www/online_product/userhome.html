@@ -1,0 +1,70 @@
+<ion-view view-title="Dash Board" name="dashboard-view">
+
+	<ion-nav-bar class="bar-positive">
+		<ion-nav-buttons side="left">
+	    	<button menu-toggle="left" class="button button-icon ion-navicon"></button>
+	  	</ion-nav-buttons>
+	  	<ion-nav-buttons side="right">
+	    	<button class="button button-icon ion-android-more-vertical" ng-click="openPopover($event)"></button>
+	  	</ion-nav-buttons>
+  	</ion-nav-bar>
+ 
+  <ion-content class="padding">
+     
+     <div class = "row">
+ 
+<div class = "col text-center">
+              <!-- <button class = "button button-positive">Icon</button> -->
+              <img src="img/qs.png" class="border" ng-click="quickSearch();" />
+              <br/>
+Quick Search
+            </div>
+ 
+ 
+<div class = "col text-center">
+              <!-- <button class = "button button-positive">Icon</button> -->
+              <img src="img/ss.png" class="border" />
+              <br/>
+Saved Search
+            </div>
+ 
+          </div>
+ 
+ 
+<div class = "row">
+ 
+<div class = "col text-center">
+              <!-- <button class = "button button-positive">Icon</button> -->
+              <img src="img/pt.png" class="border" />
+              <br/>
+Project Tracker
+            </div>
+ 
+ 
+<div class = "col text-center">
+              <!-- <button class = "button button-positive">Icon</button> -->
+              <img src="img/ct.png" class="border" />
+              <br/>
+Contract Tracker
+            </div>
+ 
+          </div>
+ 
+ 
+<div class = "row">
+ 
+<div class = "col text-center">
+              <button class = "button button-positive">Icon</button><br/>
+Title
+            </div>
+ 
+ 
+<div class = "col text-center">
+              <button class = "button button-positive">Icon</button><br/>
+Title
+            </div>
+ 
+          </div>
+      
+  </ion-content>
+</ion-view>

@@ -1,0 +1,42 @@
+/* Empty. Add your own CSS if you like */
+
+.text-underline {
+	text-decoration: underline;
+}
+
+.text-as-link {
+	text-decoration: underline;
+	color: blue;
+}
+
+.font-bold {
+	font-weight: bold;
+}
+
+.border {
+	border: 1px solid #b2b2b2;
+}
+
+/* .home-container {
+  display: -webkit-flex;
+  -webkit-flex-direction: column;
+} */
+
+/* .home-container {
+     display: -webkit-flex;
+     -webkit-flex-direction: column;
+     height: 100%;
+}
+.home-container > .row {
+     -webkit-flex: 1;
+}
+
+.header {
+     -webkit-flex: 1.5 !important;
+     -webkit-align-items: center;
+     background-color: #1abc9c;
+}
+ 
+.icon-row {
+     -webkit-align-items: center;
+} */

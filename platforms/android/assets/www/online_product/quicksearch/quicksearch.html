@@ -1,0 +1,75 @@
+
+<ion-view view-title="Quick Search">
+	<ion-nav-bar class="bar-positive">
+		<ion-nav-buttons side="left">
+	  		<button class="button button-stable ion-chevron-left" ng-click="goBack()">Back</button>
+	  	</ion-nav-buttons>
+	  	<!-- <ion-nav-buttons side="right">
+	  		<button class="button icon-left ion-home button-stable" ng-click="home()">Home</button>
+	    	<button class="button icon-left ion-log-out button-stable" ng-click="logout()">Logout</button>
+	  	</ion-nav-buttons> -->
+  	</ion-nav-bar>
+ 
+  <ion-content class="padding">
+  <form name="quickSearchForm" method="post" ng-submit="getQuickSearchResults(formdata, quickSearchForm)" novalidate="novalidate">
+  	<!-- <div class="text-center bar bar-header">
+      <h3 class="title">Quick Search</h3>
+    </div> -->
+    
+    <!-- state -->
+    <label class="item item-input item-select">
+	  <div class="input-label">
+	      State
+	  </div>
+	  <select class="padding" ng-model="formdata.stateId" ng-options="state[0] as state[1] for state in stateIdList">
+	  </select>
+	</label>
+    <!-- <div class="item-input-inset">
+    <h4 class="title padding">State</h4>
+     <select class="padding" ng-model="formdata.stateId" ng-options="state[0] as state[1] for state in stateIdList">
+	</select>
+	</div> -->
+	
+    <!-- all/new projects -->
+    <div class="row item-text-wrap">
+      	<ion-radio class="col" ng-model="formdata.newProject" ng-value="0">All Projects</ion-radio>
+		<ion-radio class="col" ng-model="formdata.newProject" ng-value="1">New Projects</ion-radio>
+    </div>
+    
+     <!-- section -->
+     <h4 class="title ion-chevron-down" ng-click="hideSections(hideSection)">Section</h4>
+     <ion-checkbox ng-model="formdata.sectionList[sec[0]]" ng-repeat="sec in sectionList" ng-value="sec[0]" ng-hide="hideSection">{{sec[1]}}</ion-checkbox>
+     
+      <!-- stage -->
+     <h4 class="title ion-chevron-down" ng-click="hideStages(hideStage)">Stage</h4>
+     <ion-checkbox ng-model="formdata.subSecList[subSec[2]]" ng-repeat="subSec in subSectionList" ng-value="subSec[2]" ng-hide="hideStage">{{subSec[1]}}</ion-checkbox>
+     
+      <!-- construction type -->
+     <h4 class="title ion-chevron-down" ng-click="hideConsTypes(hideConsType)">Construction Type</h4>
+     <ion-checkbox ng-model="formdata.consTypeList[consType.split(':')[0]]" ng-repeat="consType in constructionTypeList" ng-value="consType.split(':')[0]" ng-hide="hideConsType">{{consType.split(':')[1]}}</ion-checkbox>
+     
+      <!-- divisions -->
+     <h4 class="title ion-chevron-down" ng-click="hideDivisions(hideDivision)">Divisions of Work</h4>
+     <select ng-model="formdata.divisionList" ng-hide="hideDivision" ng-options="division[0] as division[1] for division in divisionList" size="6" multiple>
+    	<!-- <option ng-repeat="division in divisionList" ng-value="division[0]" >{{division[1]}}</option> -->
+	</select>
+
+	 <!-- show all -->
+    <ion-checkbox ng-model="formdata.showAll" ng-value="1">Show All (removes 100 limit)</ion-checkbox>
+  
+	   <!-- display mode (Brief/Detail) -->
+	   <!-- commenting display mode as we are showing only brief results -->
+	  <!-- <div class="button-bar"> 
+	  <h3 class="title padding">Display Mode:</h3> 
+	  <ion-radio ng-model="formdata.displayMode" ng-value="displayModeList[0]">{{displayModeList[0]}}</ion-radio>
+	  </div> -->
+	  
+	   <!-- Reset and submit buttons -->
+	   <div class="col text-center">
+	  <button type="reset" class="button button-positive">Reset</button>
+ 	 <button type="submit" class="button button-positive">Search</button>
+ 	 </div>
+ 	  
+  </form> 
+  </ion-content>
+</ion-view>
