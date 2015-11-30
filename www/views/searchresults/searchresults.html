@@ -1,0 +1,81 @@
+ 
+ 
+ <ion-view view-title="Search Results" cache-view="false">
+	
+	<ion-nav-bar class="bar-positive">
+		<ion-nav-buttons side="left">
+	    	<button menu-toggle="left" class="button button-icon ion-navicon"></button>
+	  	</ion-nav-buttons>
+	  	<ion-nav-buttons side="right">
+	    	<button class="button button-icon ion-android-more-vertical" ng-click="openPopover($event)"></button>
+	  	</ion-nav-buttons>
+  	</ion-nav-bar>
+  	
+ <ion-content class="has-header">
+ 
+ <!-- No. of projects -->
+ <h4 class="title text-center" ng-show="projects.length>=0">No. of results: {{projects.length}}</h4>
+
+<!-- search result list -->
+<ion-list
+          show-delete="shouldShowDelete"
+          show-reorder="shouldShowReorder"
+          can-swipe="listCanSwipe">
+  <ion-item ng-repeat="project in projects" on-hold="longPress(project[0]);">
+
+   <!-- <img ng-src="{{item.img}}">-->
+   	<div ng-click="getProjectDetailByID(project[0])">
+    <h2>{{$index+1}}) {{project[4]}}</h2>
+    <div class="row"> 
+    <div class="col">{{project[7]}}, {{project[8]}} - {{project[6]}}</div>
+    </div>
+    <div class="row" ng-show="project[3].length>0 || project[5]!='$0'">
+    <div class="col">{{project[3]}}{{project[3].length > 0 ? (project[5]!='$0' ? ', '+project[5] : '') : (project[5]!='$0' ? project[5] : '') }}</div>
+    </div>
+    </div>
+    <!-- <div id="{{'project-' + $index}}" after-render="hideDivInitially('project-' + $index)">
+    <div class="row"> 
+    <div class="col">Public/Private : {{project[2]}}</div>
+    </div>
+    <div class="row">
+    <div class="col">Bid Date/Status : {{project[3]}}</div>
+    </div>
+    <div class="row">
+    <div class="col">Value : {{project[5]}}</div>
+    </div>
+    <div class="row">
+    <div class="col">Bid Stage : {{project[6]}}</div>
+    </div>
+    <div class="row">
+    <div class="col">County : {{project[7]}}</div>
+    </div>
+    <div class="row">
+    <div class="col">State : {{project[8]}}</div>
+    </div>
+    <div class="row">
+    <div class="col"><a class="text-as-link" ng-click="getProjectDetailByID(project[0])">View in Detail</a></div>
+    </div>
+    </div> -->
+   <!--  <ion-option-button class="button-positive"
+                       ng-click="copy(savedSearch)">
+      Run
+    </ion-option-button>
+    <ion-option-button class="button-balanced"
+                       ng-click="edit(savedSearch)">
+      Edit
+    </ion-option-button>
+      <ion-option-button class="button-assertive"
+                       ng-click="delete(savedSearch)">
+      Delete
+    </ion-option-button> -->
+   <!-- <ion-delete-button class="ion-minus-circled"
+                       ng-click="savedSearches.splice($index, 1)">
+    </ion-delete-button>
+    <ion-reorder-button class="ion-navicon"
+                        on-reorder="reorderItem(savedSearch, $fromIndex, $toIndex)">
+    </ion-reorder-button>-->
+
+  </ion-item>
+</ion-list>
+</ion-content>
+</ion-view>

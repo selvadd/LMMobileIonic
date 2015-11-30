@@ -1,0 +1,36 @@
+
+<!-- This is the parent template for view using side menu -->
+<!--  enable-menu-with-back-views attribute has to be true in order to show side menu when moving from one page to another -->
+<ion-side-menus enable-menu-with-back-views="true">
+
+  <ion-side-menu-content>
+  
+   	<!-- navigation bar -->
+    <ion-nav-bar class="bar-balanced"></ion-nav-bar>
+    
+    <!-- navigation view -->
+    <ion-nav-view></ion-nav-view>
+    
+  </ion-side-menu-content>
+
+  <ion-side-menu side="left">
+    <header class="bar bar-header bar-stable">
+      <h1 class="title">Menu</h1>
+    </header>
+    <ion-content class="has-header">
+      <ion-list>
+        <ion-item class="icon-left ion-home" menu-close ng-click="home()">
+          Home
+        </ion-item>
+        <ion-item class="icon-left ion-search" menu-close ng-click="quickSearch()">
+          Quick Search
+        </ion-item>
+        <ion-item class="icon-left ion-log-out" menu-close ng-click="logout()">
+          Logout
+        </ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-side-menu>
+  
+</ion-side-menus>
+

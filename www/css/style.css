@@ -1,5 +1,4 @@
 /* Empty. Add your own CSS if you like */
-
 .text-underline {
 	text-decoration: underline;
 }
@@ -15,6 +14,14 @@
 
 .border {
 	border: 1px solid #b2b2b2;
+}
+
+.no-border {
+	border: none;
+}
+
+.text-wrap {
+	word-wrap: break-word;
 }
 
 /* .home-container {

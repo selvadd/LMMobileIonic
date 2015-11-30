@@ -1,0 +1,111 @@
+ 
+ <ion-view view-title="Project Detail">
+	<ion-nav-bar class="bar-positive">
+		<ion-nav-buttons side="left">
+	    	<button menu-toggle="left" class="button button-icon ion-navicon"></button>
+	  	</ion-nav-buttons>
+	  	<ion-nav-buttons side="right">
+	    	<button class="button button-icon ion-android-more-vertical" ng-click="openPopover($event)"></button>
+	  	</ion-nav-buttons>
+  	</ion-nav-bar>
+  	
+ <ion-content class="has-header">
+ 	
+ 	<div class="row">
+ 	<div class="col text-center font-bold">{{projectDetail.title}}</div>
+ 	</div>
+ 	
+ 	<!-- Location -->
+ 	<div ng-show="projectDetail.county.length > 0">
+ 	<div class="row"> 
+    <div class="col font-bold">LOCATION</div>
+    </div>
+ 	<div class="row"> 
+    <div class="col">{{projectDetail.city}} {{projectDetail.county.length > 0 ? '('+projectDetail.county+')' : ''}} {{projectDetail.streetAdd.length > 0 ? projectDetail.streetAdd+'.' : ''}}</div>
+    </div>
+    </div>
+    
+    <!-- Estimated Amount -->
+    <div ng-show="projectDetail.estimatedAmountLower > 0">
+    <div class="row"> 
+    <div class="col font-bold">ESTIMATED AMOUNT</div>
+    </div>
+ 	<div class="row"> 
+    <div class="col">${{projectDetail.estimatedAmountLower | number}}</div>
+    </div>
+    </div>
+    
+    <!-- Contracting Method -->
+    <div ng-show="projectDetail.conMethod.length > 0">
+    <div class="row"> 
+    <div class="col font-bold">CONTRACTING METHOD</div>
+    </div>
+ 	<div class="row"> 
+    <div class="col">{{projectDetail.conMethod}}</div>
+    </div>
+    </div>
+    
+    <!-- Update -->
+    <div ng-show="projectDetail.prefix.length > 0 || projectDetail.suffix.length > 0">
+    <div class="row"> 
+    <div class="col font-bold">UPDATE</div>
+    </div>
+ 	<div class="row"> 
+    <div class="col">{{projectDetail.prefix.length > 0 ? projectDetail.prefix+'.' : ''}} {{projectDetail.prefixText.length > 0 ? projectDetail.prefixText+'.' : ''}} {{projectDetail.suffix.length > 0 ? projectDetail.suffix+'.' : ''}} {{projectDetail.suffixText.length > 0 ? projectDetail.suffixText+'.' : ''}}</div>
+    </div>
+    </div>
+    
+    <!-- Bids Due -->
+    <div ng-show="projectDetail.bidsDetails.length > 0">
+    <div class="row"> 
+    <div class="col font-bold">BIDS DUE</div>
+    </div>
+ 	<div class="row"> 
+ 	<!-- Here 'asDate' filter is used to convert projectDetail.bidDate to date object -->
+    <div class="col">{{projectDetail.bidDate | asDate | date: 'MMMM dd, yyyy'}} {{projectDetail.bidsDetails}}</div>
+    </div>
+    </div>
+    
+    <!-- Owner -->
+    <div ng-show="projectDetail.owners.length > 0">
+    <div ng-repeat="owner in projectDetail.owners">
+    <div class="row"> 
+    <div class="col font-bold">{{owner.contactTypeText | uppercase}}</div>
+    </div>
+ 	<div class="row"> 
+    <div class="col">{{owner.companyName}}</div>
+    </div>
+    <div class="row"> 
+    <div class="col">{{owner.address1.length > 0 ? owner.address1 : ''}} {{owner.address2.length > 0 ? owner.address2 : ''}}{{owner.city.length > 0 ? ', '+owner.city : ''}}{{owner.zip.length > 0 ? ' '+owner.zip : ''}}</div>
+    </div>
+    <div class="row"> 
+    <div class="col">CONTACT</div>
+    </div>
+ 	<div class="row"> 
+    <div class="col"><a href="mailto:{{owner.contactPersonEmail}}">{{owner.contactPersonName}}</a>
+    <span ng-show="owner.telephone1.length > 0">
+    Phone #1: <a href="tel://{{owner.telephone1.trim()}}">{{owner.telephone1.trim()}}</a>
+    </span>
+    <span ng-show="owner.telephone2.length > 0">
+    Phone #2: <a href="tel://{{owner.telephone2.trim()}}">{{owner.telephone2.trim()}}</a>
+    </span>
+    <span ng-show="owner.fax1.length > 0">
+    Fax #1: <a href="tel://{{owner.fax1.trim()}}">{{owner.fax1.trim()}}</a>
+    </span>
+    <span ng-show="owner.fax2.length > 0">
+    Fax #2: <a href="tel://{{owner.fax2.trim()}}">{{owner.fax2.trim()}}</a>
+    </span>
+    </div>
+    </div>
+    </div>
+    </div>
+    
+    <!-- Divisions -->
+    <div ng-show="">
+    {{projectDetail.division_name_list}}
+    
+    
+    </div>
+    
+  </ion-content>
+</ion-view>

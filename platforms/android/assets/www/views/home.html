@@ -1,0 +1,28 @@
+<ion-view view-title="Dash Board" name="dashboard-view">
+
+	<ion-nav-bar class="bar-positive">
+		<ion-nav-buttons side="left">
+	    	<button menu-toggle="left" class="button button-icon ion-navicon"></button>
+	  	</ion-nav-buttons>
+	  	<ion-nav-buttons side="right">
+	    	<button class="button button-icon ion-android-more-vertical" ng-click="openPopover($event)"></button>
+	  	</ion-nav-buttons>
+  	</ion-nav-bar>
+ 
+  <ion-content>
+     
+      <!-- List of Quick Links -->
+     <ion-list class="list list-inset">
+      <ion-item collection-repeat="subSec in subSectionList" item-width="50%" class="item no-border">
+        <div class="col button button-positive text-wrap" ng-click="quickLinkResults(subSec[2]);">
+        <!-- <img src="img/qs.png" /><br/> -->
+        {{subSec[1]}}</div>
+      </ion-item>
+    </ion-list>
+    
+    <ion-toggle ng-click="setShowAll();">
+	  Show All (removes 200 limit)
+	</ion-toggle>
+    
+  </ion-content>
+</ion-view>

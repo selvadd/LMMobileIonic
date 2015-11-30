@@ -8,7 +8,23 @@
 
 angular.module('cdc', ['ionic'])
 
-.run(function($ionicPlatform) {
+.config(function ($urlRouterProvider, $ionicConfigProvider) {
+	
+  $urlRouterProvider.otherwise(function ($injector) {
+	  
+	  // to show home page, instead of login page, if user already logged in
+	  $injector.get("$state").go("menu.home");
+  });
+  
+  // To center align the title in both IOS and Android.
+  // Android's default alignment of titles is left alignment. Below line resolves this.
+  $ionicConfigProvider.navBar.alignTitle('center');
+  
+})
+
+
+.run(function($ionicHistory, $ionicPlatform, $rootScope, $state, AuthService, AUTH_EVENTS) {
+	
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -19,50 +35,53 @@ angular.module('cdc', ['ionic'])
       StatusBar.styleDefault();
     }
   });
-})
-
-.config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
-  $urlRouterProvider.otherwise(function ($injector, $location) {
-    var $state = $injector.get("$state");
-    $state.go("menu.home");
-  });
   
-  // To center align the title in both IOS and Android.
-  // Android's default alignment of titles is left alignment. Below line resolves this.
-  $ionicConfigProvider.navBar.alignTitle('center');
+  //This function is called while clicking back button in mobile devices
+	// Used to decide whether to go back or exit the app
+	$ionicPlatform.registerBackButtonAction(function() {
+		console.log($state.current.name);
+	  if ($state.current.name == "menu.home" || $state.current.name == "login") {
+		  navigator.app.exitApp();
+	  } else {
+		  $ionicHistory.goBack();
+		  //navigator.app.goBack();
+	  }
+	},100);
   
-})
-
-/*.run(function($httpBackend){
-    $httpBackend.whenGET('http://localhost:8100/valid')
-        .respond({message: 'This is my valid response!'});
-  $httpBackend.whenGET('http://localhost:8100/notauthenticated')
-        .respond(401, {message: "Not Authenticated"});
-  $httpBackend.whenGET('http://localhost:8100/notauthorized')
-        .respond(403, {message: "Not Authorized"});
-  $httpBackend.whenGET('http://localhost:8080/RestfulWS_Server/demo/helloworld')
-  	.respond({message: 'Helloworld!'});*/
-    
-  //$httpBackend.whenGET(/demo\/\w+.*/).passThrough();
-//})
-
-.run(function ($rootScope, $state, AuthService, AUTH_EVENTS) {
-  $rootScope.$on('$stateChangeStart', function (event,next, nextParams, fromState) {
+	// state change listener
+	$rootScope.$on('$stateChangeStart', function (event, next, nextParams, fromState) {
+		
+		// check whether user logged in before moving to another state
+	    if (!AuthService.isAuthenticated()) {
+	    	//condition to check the next state name is 'login' or not
+	      if (next.name !== 'login') {
+	        event.preventDefault();
+	        
+	        // move to login page if user is not authenticated.
+	        $state.go('login');
+	        
+	        //check to not to show session lost message when opening the app
+	        if(fromState.name!='') {
+	        	$rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
+	        }
+	        
+	      }
+	    }
+	    
+	    // check whether user is authorized to view the next state
+		if ('data' in next && 'authorizedRoles' in next.data) {
+	      
+			var authorizedRoles = next.data.authorizedRoles;
+	      
+			if (!AuthService.isAuthorized(authorizedRoles)) {
+	    	  console.log('!AuthService.isAuthorized');
+	    	  event.preventDefault();
+	    	  $state.go($state.current, {}, {reload: true});
+	    	  $rootScope.$broadcast(AUTH_EVENTS.notAuthorized);
+			}
+	      
+	    }
  
-    if ('data' in next && 'authorizedRoles' in next.data) {
-      var authorizedRoles = next.data.authorizedRoles;
-      if (!AuthService.isAuthorized(authorizedRoles)) {
-        event.preventDefault();
-        $state.go($state.current, {}, {reload: true});
-        $rootScope.$broadcast(AUTH_EVENTS.notAuthorized);
-      }
-    }
- 
-    if (!AuthService.isAuthenticated()) {
-      if (next.name !== 'login') {
-        event.preventDefault();
-        $state.go('login');
-      }
-    }
-  });
+	    
+	});
 })
