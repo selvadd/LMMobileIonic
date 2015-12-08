@@ -13,13 +13,15 @@
   	
  <ion-content class="has-header">
  
+ <!-- No. of projects -->
  <h4 class="title text-center" ng-show="projects.length>=0">No. of results: {{projects.length}}</h4>
- <button on-hold="longPress();">longpress</button>
+
+<!-- search result list -->
 <ion-list
           show-delete="shouldShowDelete"
           show-reorder="shouldShowReorder"
           can-swipe="listCanSwipe">
-  <ion-item ng-repeat="project in projects" on-hold="longPress(project[0]);">
+  <ion-item ng-repeat="project in projects" on-hold="openProjectMenu(project[0],project[4]);">
 
    <!-- <img ng-src="{{item.img}}">-->
    	<div ng-click="getProjectDetailByID(project[0])">

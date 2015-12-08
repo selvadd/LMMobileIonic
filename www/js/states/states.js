@@ -35,16 +35,6 @@ angular.module('cdc')
 		controller : 'quickSearchController'
 	})
 	
-	// Quick Search Results
-	.state('menu.quicksearchresults', {
-		url : '^/quicksearchresults',
-		params : {
-			'selectedData' : null
-		},
-		templateUrl : "views/searchresults/searchresults.html",
-		controller : 'quickSearchResultsController'
-	})
-	
 	// Project Detail Page
 	.state('menu.project-detail', {
 		url : '^/project-detail',
@@ -55,14 +45,15 @@ angular.module('cdc')
 		controller : 'projectDetailsController'
 	})
 
-	// Quick Links
-	.state('menu.quicklinksresults', {
-		url : '^/quicklinksresults',
+	//Project cSearch Results
+	.state('menu.searchresults', {
+		url : '^/searchresults',
 		params : {
-			'selectedData' : null
+			'url' : null,
+			'jsonData' : null
 		},
 		templateUrl : "views/searchresults/searchresults.html",
-		controller : 'quickLinksResultsController'
+		controller : 'searchResultsController'
 	});
 
 })

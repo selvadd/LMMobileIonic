@@ -8,6 +8,8 @@ angular.module('cdc')
 	
 	$scope.showLoading();
 	
+	$scope.loadDefaultMenuPopoverTemplate();
+	
 	var jsonData = {
 	  'sessionId' : window.localStorage.getItem(LOCAL_STORAGE_KEYS.SESSION_ID),
 	  'securityKey' : window.localStorage.getItem(LOCAL_STORAGE_KEYS.SECURITY_KEY)
@@ -18,37 +20,46 @@ angular.module('cdc')
  
 	WSCallService.httpGet(WS_URI.QUICK_SEARCH, jsonData).then(function(details) {
 		
-		//console.log(details);
-		var result = details.data.Data[0];
+		if(details.data.Data!=undefined) {
+			
+			//console.log(details);
+			var result = details.data.Data[0];
+			
+			//setting variables
+			var stateList = result.stateIdList;
+			var sectionList = result.sectionList;
+	      
+	      // setting subSectionList to show Quick Links in Home page
+			
+	      $scope.subSectionList = result.subSectionList;
+	      //console.log($scope.subSectionList);
+	      $scope.showAll = 0;
+	      // get state Id List
+	      for(var i=0; i < stateList.length; i++) {
+	    	  var stateId = stateList[i][0];
+	    	  if(stateIdList=='') {
+	    		  stateIdList = stateId;
+	    	  } else {
+	    		  stateIdList = stateIdList +','+ stateId;
+	    	  }
+	      }
+	      
+	      //get section Id List
+	      for(var i=0; i < sectionList.length; i++) {
+	    	  var sectionId = sectionList[i][0];
+	    	  if(sectionIdList=='') {
+	    		  sectionIdList = sectionId;
+	    	  } else {
+	    		  sectionIdList = sectionIdList +','+ sectionId;
+	    	  }
+	      }
+	      
+		} else {
+			// Moves to login page when session is invalidated
+			$state.go('login');
+		}
 		
-		//setting variables
-		var stateList = result.stateIdList;
-		var sectionList = result.sectionList;
-      
-      // setting subSectionList to show Quick Links in Home page
-      $scope.subSectionList = result.subSectionList;
-      $scope.showAll = 0;
-      // get state Id List
-      for(var i=0; i < stateList.length; i++) {
-    	  var stateId = stateList[i][0];
-    	  if(stateIdList=='') {
-    		  stateIdList = stateId;
-    	  } else {
-    		  stateIdList = stateIdList +','+ stateId;
-    	  }
-      }
-      
-      //get section Id List
-      for(var i=0; i < sectionList.length; i++) {
-    	  var sectionId = sectionList[i][0];
-    	  if(sectionIdList=='') {
-    		  sectionIdList = sectionId;
-    	  } else {
-    		  sectionIdList = sectionIdList +','+ sectionId;
-    	  }
-      }
-      
-      $scope.hideLoading();
+		$scope.hideLoading();
       
 	}, function(error) {
 		console.log(error.status);
@@ -113,14 +124,29 @@ angular.module('cdc')
 		
 		//console.log(subSec);
 		
-		var data = {
+		var url = WS_URI.QUICK_SEARCH_RESULTS; // quick links results are shown using quick search web service
+		
+		/*var jsonData = {
 			'stateIds' : stateIdList,
 			'sectionIds' : sectionIdList,
 			'subSection' : subSec,
 			'showAll' : $scope.showAll
-		};
+		};*/
 		
-		$state.go('menu.quicklinksresults', {selectedData : data});
+		var jsonData = {
+	   		'sessionId' : window.localStorage.getItem(LOCAL_STORAGE_KEYS.SESSION_ID),
+	   		'securityKey' : window.localStorage.getItem(LOCAL_STORAGE_KEYS.SECURITY_KEY),
+	   		'stateIds' : stateIdList,
+	   		'sectionIdList' : sectionIdList,
+	   		'newUpdatedFlag' : 0,
+	   		'subSectionList' : subSec,
+	   		'constructionTypes' : '',
+	   		'divisionIdList' : '',
+	   		'showAll' : $scope.showAll,
+	   		'displayMode' : ''
+	   	};
+		
+		$state.go('menu.searchresults', {url: url, jsonData : jsonData});
 	}
 	
 });

@@ -4,7 +4,8 @@
 
 angular.module('cdc')
 
-.controller('loginController', function($scope, $state, $ionicPopup, AuthService, WSCallService, WS_URI, ID) {
+.controller('loginController', function($scope, $state, $ionicPopup, AuthService, WSCallService, ErrorMsgService, WS_URI, ID) {
+	
 	$scope.submitted = false;
 	
   $scope.data = {};
@@ -18,8 +19,6 @@ angular.module('cdc')
 		  return false;
 	  }
 	
-	  //testing
-	  
 	  /*
 	  
 	  WSCallService.httpGet(WS_URI.LOGOUT, jsonData).then(function(result) {
@@ -28,9 +27,6 @@ angular.module('cdc')
 			
 		});
 	  */
-	  
-	  
-	  //till testing
 	  
 	  //shows loading text
 	 $scope.showLoading();
@@ -45,10 +41,9 @@ angular.module('cdc')
       
     }, function(err) {
     	$scope.hideLoading();
-	    var alertPopup = $ionicPopup.alert({
-	        title: 'Login failed!',
-	        template: err
-	    });
+    	
+    	ErrorMsgService.titleAndError('Login Failed', err);
+	    
     });
     
   };

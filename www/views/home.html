@@ -12,8 +12,8 @@
   <ion-content>
      
       <!-- List of Quick Links -->
-     <ion-list class="list list-inset">
-      <ion-item collection-repeat="subSec in subSectionList" item-width="50%" class="item no-border">
+     <ion-list>
+      <ion-item collection-repeat="subSec in subSectionList" item-width="50%" class="no-border">
         <div class="col button button-positive text-wrap" ng-click="quickLinkResults(subSec[2]);">
         <!-- <img src="img/qs.png" /><br/> -->
         {{subSec[1]}}</div>

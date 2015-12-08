@@ -1,5 +1,7 @@
 /**
  * WSCallService is a service to perform web service calls
+ * 
+ * http
  */
 
 angular.module('cdc')
@@ -8,7 +10,7 @@ angular.module('cdc')
 	
 	var httpGet = function (ws_uri, jsonData) {
 		
-		return $q(function(resolve, reject) {
+		var qFunc = function (resolve, reject) {
 			
 			$http({
 			    
@@ -26,10 +28,12 @@ angular.module('cdc')
 				
 			});
 			
-		});
+		};
+
+		return $q(qFunc);
 	};
 	
-	//setting each function to a name, so that the functions can be accessed as WSCallService.variablesName();
+	//setting each function to a name (name: function in return statement), so that the functions can be accessed as WSCallService.name();
 	// for accessing httpGet function: WSCallService.httpGet();
 	return {
 		httpGet: httpGet

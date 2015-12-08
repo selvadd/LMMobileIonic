@@ -68,7 +68,7 @@ angular.module('cdc')
 			        storeUserCredentials(result.data.securityKey, result.data.sessionId);
 			        resolve('Login success.');
 				} else {
-					reject('Username or Password is incorrect');
+					reject('UPI');
 				}
 			} else {
 				reject('Unable to process your request. Please try later !');
@@ -76,58 +76,11 @@ angular.module('cdc')
 		  
 	  }, function(error) {
 		  console.log(error.status);
-			
-			//status=0 means unable to connect server (net::ERR_CONNECTION_REFUSED)
-			//status=400 means Bad Request
-			//status=404 means URL not found
-			if(error.status==0){
-				reject('Unable to connect the server. Please try again later !');
-			} else if(error.status==400){
-				reject('Please enter Username and Password');
-			} else if(error.status==404){
-				reject('Requested URL not found');
-			} else {
-				reject('Unable to process your request. Please try again later !');
-			}
+
+		  reject(error.status);
+		  
 	  });
       
-    	/*$http({
-		    method : 'GET',
-		    url : WS_URI.LOGIN,
-		    params : jsonData
-		}).success(function(data, status, headers, config) {
-			
-			if(data!=undefined) {
-				if (data.iTotalRecords==1) {
-					
-					username = name;
-			        // Make a request and receive your auth token from your server
-			        storeUserCredentials(data.securityKey, data.sessionId);
-			        resolve('Login success.');
-				} else {
-					reject('Username or Password is incorrect');
-				}
-			} else {
-				reject('Unable to process your request. Please try later !');
-			}
-		      
-		}).error(function(data, status, headers, config) {
-			//console.log(data+' '+status);
-			
-			//status=0 means unable to connect server (net::ERR_CONNECTION_REFUSED)
-			//status=400 means Bad Request
-			//status=404 means URL not found
-			if(status==0){
-				reject('Unable to connect the server. Please try again later !');
-			} else if(status==400){
-				reject('Please enter Username and Password');
-			} else if(status==404){
-				reject('Requested URL not found');
-			} else {
-				reject('Unable to process your request. Please try again later !');
-			}
-		});*/
-    	
     });
     
   };
@@ -150,22 +103,6 @@ angular.module('cdc')
 			
 		});
 		
-	  /*  $http({
-		    method : 'GET',
-		    url : WS_URI.LOGOUT,
-		    params : jsonData
-		}).success(function(data, status, headers, config) {
-			console.log(data+' '+status);
-			if (data.iTotalRecords==1) {
-				
-			} else {
-				
-			}
-		      
-		}).error(function(data, status, headers, config) {
-			console.log(data+' '+status);
-			
-		});*/
 	}
     
     destroyUserCredentials();

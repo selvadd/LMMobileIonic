@@ -47,10 +47,30 @@ angular.module('cdc')
 	  //function to show quick search form
 	  $scope.quickSearch = function() {
 		  // to reload quick search form when moving to quick search form from other states (except quick search form).
-		  $ionicHistory.clearCache().then(function(){ 
+		  //commented since back button not working after moving to quick search form
+		  //$ionicHistory.clearCache().then(function(){ 
 			  $state.go('menu.quicksearch', {}, {reload: true});
-		  });
+		  //});
 	  };
+
+	  //function used to change the right side menu by passing new template url
+	  //new template content should be inside <ion-popover-view> tag
+	  $scope.changeMenuPopoverTemplate = function(templateUrl) {
+		  $ionicPopover.fromTemplateUrl(templateUrl, {
+		    scope: $scope
+		  }).then(function(popover) {
+		    $scope.popover = popover;
+		  });
+	  }
+	  
+	  // This function has to be called in every controller if they don't have to change right side menu.
+	  $scope.loadDefaultMenuPopoverTemplate = function() {
+		  $ionicPopover.fromTemplateUrl('templates/menuPopOver.html', {
+		    scope: $scope
+		  }).then(function(popover) {
+		    $scope.popover = popover;
+		  });
+	  }
 	
 	/*$scope.performUnauthorizedRequest = function() {
     $http.get('http://localhost:8100/notauthorized').then(

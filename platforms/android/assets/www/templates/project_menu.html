@@ -1,12 +1,9 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
-</head>
-<body>
 
-<button ng-click="closeProjectMenu();">close</button>
+<!-- popup menu shown when project in long pressed -->
 
-</body>
-</html>
+<ion-list>
+    <ion-item menu-close ng-click="getProjectDetailByID(id)">View</ion-item>
+    <ion-item menu-close="">Screen</ion-item>
+    <ion-item menu-close="">Track</ion-item>
+    <ion-item menu-close="">Email</ion-item>
+</ion-list>
