@@ -39,7 +39,7 @@ angular.module('cdc', ['ionic'])
   //This function is called while clicking back button in mobile devices
 	// Used to decide whether to go back or exit the app
 	$ionicPlatform.registerBackButtonAction(function() {
-		console.log($state.current.name);
+		console.log('state : '+$state.current.name);
 	  if ($state.current.name == "menu.home" || $state.current.name == "login") {
 		  navigator.app.exitApp();
 	  } else {

@@ -9,8 +9,14 @@
 
 angular.module('cdc')
  
-.constant('ERROR', [
-  {code: '0', message: 'Unable to connect the server. Please try again later !'},
-  {code: '404', message: 'Requested URL not found'},
-  {code: 'UPI', message: 'Username or Password is incorrect'}
-]);
+.constant('ERROR',(function(){
+	
+	return [
+	  
+	  {code: '0', message: 'Unable to connect the server. Please try again later !'},
+	  {code: '404', message: 'Requested URL not found'},
+	  {code: 'UPI', message: 'Username or Password is incorrect'},
+	  
+	];
+
+})());

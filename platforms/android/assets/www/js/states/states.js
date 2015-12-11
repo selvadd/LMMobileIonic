@@ -45,7 +45,7 @@ angular.module('cdc')
 		controller : 'projectDetailsController'
 	})
 
-	//Project cSearch Results
+	//Project Search Results
 	.state('menu.searchresults', {
 		url : '^/searchresults',
 		params : {
@@ -54,6 +54,17 @@ angular.module('cdc')
 		},
 		templateUrl : "views/searchresults/searchresults.html",
 		controller : 'searchResultsController'
+	})
+	
+	// Saved Search List
+	.state('menu.savedsearch', {
+		url : '^/savedsearch',
+		/*params : {
+			'url' : null,
+			'jsonData' : null
+		},*/
+		templateUrl : "views/savedsearch/savedsearchlist.html",
+		controller : 'savedSearchController'
 	});
 
 })

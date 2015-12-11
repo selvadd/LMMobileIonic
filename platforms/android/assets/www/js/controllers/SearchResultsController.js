@@ -8,8 +8,8 @@ angular.module('cdc')
 	
 	$scope.showLoading();
 	
-	console.log($stateParams.url);
-	console.log($stateParams.jsonData);
+	//console.log($stateParams.url);
+	//console.log($stateParams.jsonData);
 	
 	$scope.loadDefaultMenuPopoverTemplate();
 	
@@ -22,7 +22,6 @@ angular.module('cdc')
 			$scope.listCanSwipe = true;
 			//$scope.showProjectDetails = true;
 			$scope.projects = result.data.aaData;
-			console.log(result.data.aaData.length);
 			$scope.hideLoading();
 		}, function(error) {
 			console.log(error);
@@ -35,14 +34,14 @@ angular.module('cdc')
 	
 	// to show project detail
 	$scope.getProjectDetailByID = function(id) {
-		 console.log(id);
+		 //console.log(id);
 		 $state.go('menu.project-detail', {id : id});
 		 $scope.closeProjectMenu();
 	 };
 	 
 	 //function called when a project is long pressed
 	 $scope.openProjectMenu = function(id, title) {
-		 console.log(id);
+		 //console.log(id);
 		 $scope.id = id;
 		 
 		 $scope.projectMenuPopup = $ionicPopup.show({
@@ -68,5 +67,5 @@ angular.module('cdc')
 		 if($scope.projectMenuPopup!=undefined)
 		 $scope.projectMenuPopup.close();
 	 }
-		  
+	 
 });

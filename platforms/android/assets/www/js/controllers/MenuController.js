@@ -61,7 +61,7 @@ angular.module('cdc')
 		  }).then(function(popover) {
 		    $scope.popover = popover;
 		  });
-	  }
+	  };
 	  
 	  // This function has to be called in every controller if they don't have to change right side menu.
 	  $scope.loadDefaultMenuPopoverTemplate = function() {
@@ -70,8 +70,13 @@ angular.module('cdc')
 		  }).then(function(popover) {
 		    $scope.popover = popover;
 		  });
-	  }
+	  };
 	
+	  //function to show saved search list
+	  $scope.savedSearch = function() {
+		  $state.go('menu.savedsearch', {}, {reload: true});
+	  };
+	  
 	/*$scope.performUnauthorizedRequest = function() {
     $http.get('http://localhost:8100/notauthorized').then(
       function(result) {

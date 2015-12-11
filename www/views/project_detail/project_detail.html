@@ -1,9 +1,12 @@
  
  <ion-view view-title="Project Detail">
-	<ion-nav-bar class="bar-positive">
+	
+	<ion-nav-bar class="bar-cdc-blue">
 		<ion-nav-buttons side="left">
 	    	<button menu-toggle="left" class="button button-icon ion-navicon"></button>
 	  	</ion-nav-buttons>
+	  	<!-- <ion-nav-back-button class="button-clear">Back
+  </ion-nav-back-button> -->
 	  	<ion-nav-buttons side="right">
 	    	<button class="button button-icon ion-android-more-vertical" ng-click="openPopover($event)"></button>
 	  	</ion-nav-buttons>
@@ -82,18 +85,27 @@
     <div class="col">CONTACT</div>
     </div>
  	<div class="row"> 
-    <div class="col"><a href="mailto:{{owner.contactPersonEmail}}">{{owner.contactPersonName}}</a>
+    <div class="col">
+    
+    <!-- Contact Person Name -->
+     <!-- If email id is present, then show name with mailto link -->
+    <span ng-show="owner.contactPersonEmail.length > 0">
+    <a ng-href="{{'mailto:'+owner.contactPersonEmail}}">{{owner.contactPersonName}}</a>
+    </span>
+    <!-- If no email id is present, then show name without link -->
+    <span ng-show="owner.contactPersonEmail.length <= 0">{{owner.contactPersonName}}</a></span>
+    
     <span ng-show="owner.telephone1.length > 0">
-    Phone #1: <a href="tel://{{owner.telephone1.trim()}}">{{owner.telephone1.trim()}}</a>
+    Phone #1: <a ng-href="{{'tel:'+owner.telephone1.trim()}}">{{owner.telephone1.trim()}}</a>
     </span>
     <span ng-show="owner.telephone2.length > 0">
-    Phone #2: <a href="tel://{{owner.telephone2.trim()}}">{{owner.telephone2.trim()}}</a>
+    Phone #2: <a ng-href="{{'tel:'+owner.telephone2.trim()}}">{{owner.telephone2.trim()}}</a>
     </span>
     <span ng-show="owner.fax1.length > 0">
-    Fax #1: <a href="tel://{{owner.fax1.trim()}}">{{owner.fax1.trim()}}</a>
+    Fax #1: <a ng-href="{{'tel:'+owner.fax1.trim()}}">{{owner.fax1.trim()}}</a>
     </span>
     <span ng-show="owner.fax2.length > 0">
-    Fax #2: <a href="tel://{{owner.fax2.trim()}}">{{owner.fax2.trim()}}</a>
+    Fax #2: <a ng-href="{{'tel:'+owner.fax2.trim()}}">{{owner.fax2.trim()}}</a>
     </span>
     </div>
     </div>
